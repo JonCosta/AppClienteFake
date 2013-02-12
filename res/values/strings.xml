@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">AppClienteFake</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">AppCliente</string>
+    <string name="enviarPedido">Enviar Pedido</string>
+    <string name="title_activity_busca">BuscaActivity</string>
+    <string name="urlWSenviarPedido">http://192.168.1.101:8090/jersey/teste/enviarPedido</string>
+    <string name="urlWSchecarConfirmacao">http://192.168.1.101:8090/jersey/teste/checarConfirmacao</string>
+
+</resources>
