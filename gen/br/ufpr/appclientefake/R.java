@@ -34,6 +34,7 @@ public final class R {
         public static final int title_activity_busca=0x7f040005;
         public static final int title_activity_main=0x7f040003;
         public static final int urlWSchecarConfirmacao=0x7f040007;
+        public static final int urlWSenviarNovoPedido=0x7f040008;
         public static final int urlWSenviarPedido=0x7f040006;
     }
     public static final class style {

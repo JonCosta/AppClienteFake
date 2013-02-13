@@ -68,6 +68,35 @@ public class BuscaActivity extends Activity {
     	}
     }//Fecha enviarPedido
     
+    public void enviarPedido(String placa, int indice) {
+    	HashMap params = new HashMap() ;
+    	params.put("Endereco", endereco) ;
+    	params.put("Referencia", referencia) ;
+    	params.put("Latitude", latitude) ;
+    	params.put("Longitude", longitude) ;
+    	params.put("Placa", placa) ;
+    	params.put("Indice", indice) ;
+    	
+    	JSONObject jsonParams = new JSONObject(params) ; //Cria o objeto JSON com as informações do HashMap
+    	JSONObject resp = HttpClient.SendHttpPost(this.getString(R.string.urlWSenviarNovoPedido), jsonParams) ; 
+    	boolean enviado = false ;
+    	indice = 0 ;
+    	//Recebe os dados da resposta
+    	try {
+    		enviado = resp.getBoolean("Enviado") ; //Boolean para confirmar se dados foram enviados com sucesso
+			indice = resp.getInt("Indice") ; //Pega índice do Pedido
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+    	
+    	if(enviado){
+    		handler.post(run) ; //Se foram enviados os dados, inicia Runnable 
+    	}else{
+    		Toast.makeText(this, "Taxi não encontrado", Toast.LENGTH_SHORT).show() ;
+    		finish() ;
+    	}
+    }//Fecha enviarPedido
+    
     //Método da Runnable que acessa a WS para verificar se há Confirmação do Pedido enviado
     public void checarConfirmacao(){
     	HashMap params = new HashMap() ;
@@ -88,6 +117,9 @@ public class BuscaActivity extends Activity {
     	if(achou == 1){ // 1)O pedido foi aceito
     		Toast.makeText(this, nomeTaxista+" | "+placaTaxi, Toast.LENGTH_SHORT).show() ;
     		controle = false ; //Cancela o loop da Runnable
+    	}else if(achou == 2){
+    		enviarPedido(placaTaxi, indice) ;
+    		Toast.makeText(this, "Pedido Recusado", Toast.LENGTH_SHORT).show() ;
     	}
 	}//Fecha checarConfirmacao
     

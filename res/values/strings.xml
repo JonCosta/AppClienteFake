@@ -8,5 +8,6 @@
     <string name="title_activity_busca">BuscaActivity</string>
     <string name="urlWSenviarPedido">http://192.168.1.101:8090/jersey/teste/enviarPedido</string>
     <string name="urlWSchecarConfirmacao">http://192.168.1.101:8090/jersey/teste/checarConfirmacao</string>
+    <string name="urlWSenviarNovoPedido">http://192.168.1.101:8090/jersey/teste/enviarNovoPedido</string>
 
 </resources>
