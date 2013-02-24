@@ -60,11 +60,14 @@ public class BuscaActivity extends Activity {
     		enviado = resp.getBoolean("Enviado") ; //Boolean para confirmar se dados foram enviados com sucesso
 			indice = resp.getInt("Indice") ; //Pega índice do Pedido
 		} catch (JSONException e) {
-			e.printStackTrace();
+			Log.e("TAXI", "EnviarPedido: "+e.toString());
 		}
     	
     	if(enviado){
     		handler.post(run) ; //Se foram enviados os dados, inicia Runnable 
+    	}else{
+    		Toast.makeText(this, "Taxi não encontrado", Toast.LENGTH_SHORT).show() ;
+    		finish() ;
     	}
     }//Fecha enviarPedido
     
@@ -86,7 +89,7 @@ public class BuscaActivity extends Activity {
     		enviado = resp.getBoolean("Enviado") ; //Boolean para confirmar se dados foram enviados com sucesso
 			indice = resp.getInt("Indice") ; //Pega índice do Pedido
 		} catch (JSONException e) {
-			e.printStackTrace();
+			Log.e("TAXI", "EnviarPedido: "+e.toString()) ;
 		}
     	
     	if(enviado){
@@ -111,7 +114,7 @@ public class BuscaActivity extends Activity {
     		nomeTaxista = resp.getString("NomeTaxista") ;
     		placaTaxi = resp.getString("PlacaTaxi") ;
     	}catch(JSONException e){
-    		e.printStackTrace() ;
+    		Log.e("TAXI", "ChecarConfirmacao: "+e.toString()) ;
     	}
     	//Verifica valor da variavel "confirm"
     	if(achou == 1){ // 1)O pedido foi aceito
@@ -120,6 +123,8 @@ public class BuscaActivity extends Activity {
     	}else if(achou == 2){
     		enviarPedido(placaTaxi, indice) ;
     		Toast.makeText(this, "Pedido Recusado", Toast.LENGTH_SHORT).show() ;
+    	}else{
+    		Toast.makeText(this, "Nada foi encontrado", Toast.LENGTH_SHORT).show() ;
     	}
 	}//Fecha checarConfirmacao
     
